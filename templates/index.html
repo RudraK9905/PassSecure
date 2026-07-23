@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PassSecure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Password Analyzer</h1>
+        <p>Measure strength, entropy, and generate secure passwords in seconds.</p>
+      </header>
+
+      <section class="card">
+        <h2>Analyze a password</h2>
+        <form method="post" action="/">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Try a strong password" required>
+          <button type="submit">Check Strength</button>
+        </form>
+
+        {% if analysis %}
+          <div class="result">
+            <h3>{{ analysis.strength }}</h3>
+            <p>Score: {{ analysis.score }}/100</p>
+            <p>Entropy: {{ analysis.entropy }} bits</p>
+            <p>{{ analysis.feedback }}</p>
+            <p>Criteria: {{ analysis.criteria | join(', ') }}</p>
+          </div>
+        {% endif %}
+      </section>
+
+      <section class="card">
+        <h2>Generate a password</h2>
+        <form method="post" action="/generate">
+          <label for="length">Length</label>
+          <input id="length" name="length" type="number" min="8" max="32" value="16">
+          <button type="submit">Generate</button>
+        </form>
+
+        {% if generated_password %}
+          <div class="result">
+            <h3>Generated Password</h3>
+            <p class="password-value">{{ generated_password }}</p>
+            {% if generated_analysis %}
+              <p>Score: {{ generated_analysis.score }}/100</p>
+              <p>Strength: {{ generated_analysis.strength }}</p>
+              <p>{{ generated_analysis.feedback }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
