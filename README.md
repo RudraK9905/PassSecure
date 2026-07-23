@@ -14,3 +14,23 @@ A Python-based password security tool that analyzes password strength using entr
 ## Test
 Run the test suite with:
 `python -m unittest discover -s tests -q`
+
+## Screenshots
+
+### Home Page
+
+![Home](screenshots/home_page.png)
+
+### Password Analysis
+
+![Analysis](screenshots/password_analysis.png)
+
+### Password Generation
+
+![Generator](screenshots/password_generator.png)
+
+### Mobile View
+
+| Password Analysis | Password Generator |
+|-------------------|-------------------|
+| ![](screenshots/mobile_analysis.png) | ![](screenshots/mobile_generator.png) |
